@@ -11,36 +11,7 @@ app.on("ready", () => {
   createTray();
   createWindow();
 
-  const mainWindow = new BrowserWindow({
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-  })
 
-  ipcMain.on('set-opacity', (event, value) => {
-    const webContents = event.sender
-    const win = BrowserWindow.fromWebContents(webContents)
-    setBackgroundOpacity(value)
-  })
-
-  session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {
-    desktopCapturer.getSources({ types: ['window', 'screen'] }).then((sources) => {
-      // Grant access to the first screen found.
-      for (let i = 0; i < sources.length; ++i) {
-        console.log(sources[i].name, sources[i].thumbnail.getSize(),sources[i].thumbnail.getAspectRatio(), sources[i].thumbnail.getScaleFactors());
-      }
-
-      callback({ video: sources[0], audio: 'loopback' })
-    })
-  })
-
-  const primaryDisplay = screen.getPrimaryDisplay()
-  const { width, height } = primaryDisplay.workAreaSize
-
-
-  mainWindow.loadFile('screen.html')
-
-  createInScreenTray(width, height, 0, 0)
 });
 
 
@@ -78,10 +49,37 @@ const createWindow = () => {
     vibrancy: "fullscreen-ui",
     webPreferences: {
       backgroundThrottling: false,
+      preload: path.join(__dirname, 'preload.js')
+
     },
   });
+
+
+  ipcMain.on('set-opacity', (event, value) => {
+    const webContents = event.sender
+    const win = BrowserWindow.fromWebContents(webContents)
+    setBackgroundOpacity(value)
+  })
+
+  session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {
+    desktopCapturer.getSources({ types: ['window', 'screen'] }).then((sources) => {
+      for (let i = 0; i < sources.length; ++i) {
+        console.log(sources[i].name, sources[i].thumbnail.getSize(),sources[i].thumbnail.getAspectRatio(), sources[i].thumbnail.getScaleFactors());
+      }
+
+      callback({ video: sources[0], audio: 'loopback' })
+    })
+  })
+
+  const primaryDisplay = screen.getPrimaryDisplay()
+  const { width, height } = primaryDisplay.workAreaSize
+
+
   window.loadURL(`file://${path.join(__dirname, "index.html")}`);
 
+  createInScreenTray(width, height, 0, 0)
+
+  
   window.on("blur", () => {
     if (!window.webContents.isDevToolsOpened()) {
       window.hide();
