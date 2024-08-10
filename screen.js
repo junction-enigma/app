@@ -11,7 +11,7 @@ startButton.addEventListener('click', () => {
     video: {
       width: vwidth,
       height: vheight,
-      frameRate: 60
+      frameRate: 120
     }
   }).then(stream => {
     video.srcObject = stream
@@ -47,7 +47,7 @@ video.addEventListener('play', function() {
 
     if (!$this.paused && !$this.ended) {
       ctx.drawImage($this, 0, 0);
-      setTimeout(loop, 1000 / 30); // drawing at 30fps
+      setTimeout(loop, 1000 / 120); // drawing at 30fps
     }
   })();
 }, 0);

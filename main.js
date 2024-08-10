@@ -20,7 +20,6 @@ app.on("ready", () => {
   ipcMain.on('set-opacity', (event, value) => {
     const webContents = event.sender
     const win = BrowserWindow.fromWebContents(webContents)
-    console.log(value)
     setBackgroundOpacity(value)
   })
 
@@ -125,15 +124,21 @@ let isEnableOpacity = false
 
 const setBackgroundOpacity = (value) => {
   if (isEnableOpacity) {
-    inScreenTray.webContents.send('send-opacity', '0.2')
+    inScreenTray.webContents.send('send-opacity', '0.7')
   } else {
-    inScreenTray.webContents.send('send-opacity', '1')
+    inScreenTray.webContents.send('send-opacity', '0')
 
   }
 
-  if (value < 0.3) {
-    isEnableOpacity
+
+  if (isEnableOpacity && value > 0.6) {
+    isEnableOpacity = false
   }
+
+  if (value > 1) {
+    isEnableOpacity = true
+  } 
+
   
 }
 
