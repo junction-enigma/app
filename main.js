@@ -58,7 +58,8 @@ const createWindow = () => {
   ipcMain.on('set-opacity', (event, value) => {
     const webContents = event.sender
     const win = BrowserWindow.fromWebContents(webContents)
-    setBackgroundOpacity(value)
+    console.log(value)
+    setBackgroundOpacity("0.5")
   })
 
   session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {
@@ -79,7 +80,7 @@ const createWindow = () => {
 
   createInScreenTray(width, height, 0, 0)
 
-  
+
   window.on("blur", () => {
     if (!window.webContents.isDevToolsOpened()) {
       window.hide();
@@ -119,23 +120,9 @@ const createInScreenTray = (width, height, x, y) => {
 
 let isEnableOpacity = false
 
-
 const setBackgroundOpacity = (value) => {
-  if (isEnableOpacity) {
-    inScreenTray.webContents.send('send-opacity', '0.7')
-  } else {
-    inScreenTray.webContents.send('send-opacity', '0')
+  inScreenTray.webContents.send('send-opacity', value)
 
-  }
-
-
-  if (isEnableOpacity && value > 0.6) {
-    isEnableOpacity = false
-  }
-
-  if (value > 1) {
-    isEnableOpacity = true
-  } 
 
   
 }
