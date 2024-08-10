@@ -1,0 +1,280 @@
+$primary: #FF3224;
+$background: rgba(#291414, 0.9);
+$surface: rgba(#FFADC7, 0.12);
+$line: rgba(#FFADC7, 0.2);
+
+$text-100: #FFFFFF;
+$text-75: rgba(#FFADAD, 0.42);
+$text-50: rgba(#FFC2C2, 0.8);
+
+@mixin bold {
+  font-weight: 700;
+  letter-spacing: -0.45px;
+}
+
+@mixin text {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@mixin checkbox {
+  font-size: 10px;
+  line-height: 16px;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+  font-family: "SF Pro", sans-serif;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+html, body {
+  width: 260px;
+}
+
+html {
+  background-color: $background;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+.window {
+  padding: 12px;
+  gap: 12px;
+
+  >.header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 4px 0 4px;
+
+    .title {
+      font-size: 24px;
+      line-height: 24px;
+      font-weight: 1000;
+      font-variation-settings: "wdth" 150;
+
+      color: $text-50;
+    }
+
+    .buttons {
+      flex-direction: row;
+      gap: 4px;
+      cursor: pointer;
+
+      .button {
+        padding: 6px;
+        border-radius: 8px;
+        background-color: $surface;
+
+        
+        p {
+          @include text;
+          color: $text-100;
+        }
+      }
+    }
+  }
+
+  >.toggle {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 0 4px;
+
+    .power {
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 36px;
+      background-color: $primary;
+      border: 1px solid $primary;
+      box-shadow: 0px 0px 28px 0px rgba($primary, 0.4), 0px 4px 8px 4px rgba(0, 0, 0, 0.50) inset;
+      cursor: pointer;
+
+      font-size: 32px;
+      font-weight: 700;
+      color: $text-100;
+    }
+
+    .content {
+      .title {
+        font-size: 32px;
+        line-height: 32px;
+        font-weight: 1000;
+        font-variation-settings: "wdth" 150;
+        color: $primary;
+      }
+
+      .description {
+        @include text;
+        color: $text-50;
+      }
+    }
+  }
+
+  .slider {
+    flex-direction: row;
+    padding: 4px;
+    border-radius: 8px;
+    background-color: $surface;
+    border: 1px solid $line;
+
+    .item {
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      p {
+        @include text;
+        color: $text-100;
+      }
+
+      &.selected {
+        background-color: $primary;
+
+        p {
+          @include bold;
+        }
+      }
+    }
+  }
+
+  .down {
+    gap: 4px;
+  }
+
+  .collapse {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    gap: 4px;
+    padding: 6px;
+    cursor: pointer;
+
+    p {
+      @include text;
+      color: $text-50;
+    }
+  }
+
+  .groups {
+    gap: 8px;
+
+    .group {
+      gap: 12px;
+      padding: 12px;
+      padding-bottom: 16px;
+      background-color: $surface;
+      border-radius: 18px;
+
+      .header {
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+        
+        .circle {
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          border-radius: 12px;
+          background-color: $line;
+          cursor: pointer;
+          
+          @include text;
+          color: $text-100;
+        }
+
+        .title {
+          @include text;
+          @include bold;
+          color: $text-100;
+        }
+      }
+
+      .divider {
+        height: 1px;
+        background-color: $line;
+      }
+
+      .menus {
+        gap: 12px;
+
+        .menu {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+
+          .content {
+            flex-direction: row;
+            align-items: center;
+            gap: 4px;
+            color: $text-100;
+
+            p {
+              @include text;
+            }
+
+            &::after {
+              content: "􀁜";
+              @include checkbox;
+            }
+          }
+
+          &::after {
+            content: "􀆅";
+            @include checkbox;
+            @include bold;
+            color: transparent;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+            border: 2px solid $text-75;
+          }
+
+          &.selected {
+            .content {
+              color: $text-100;
+            }
+
+            &::after {
+              color: $text-100;
+              background-color: $primary;
+              border-color: $primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}

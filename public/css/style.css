@@ -1,0 +1,227 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "SF Pro", sans-serif;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+html, body {
+  width: 260px;
+}
+
+html {
+  background-color: rgba(41, 20, 20, 0.9);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+.window {
+  padding: 12px;
+  gap: 12px;
+}
+.window > .header {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 4px 0 4px;
+}
+.window > .header .title {
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 1000;
+  font-variation-settings: "wdth" 150;
+  color: rgba(255, 194, 194, 0.8);
+}
+.window > .header .buttons {
+  flex-direction: row;
+  gap: 4px;
+  cursor: pointer;
+}
+.window > .header .buttons .button {
+  padding: 6px;
+  border-radius: 8px;
+  background-color: rgba(255, 173, 199, 0.12);
+}
+.window > .header .buttons .button p {
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+.window > .toggle {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 0 4px;
+}
+.window > .toggle .power {
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 36px;
+  background-color: #FF3224;
+  border: 1px solid #FF3224;
+  box-shadow: 0px 0px 28px 0px rgba(255, 50, 36, 0.4), 0px 4px 8px 4px rgba(0, 0, 0, 0.5) inset;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.window > .toggle .content .title {
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 1000;
+  font-variation-settings: "wdth" 150;
+  color: #FF3224;
+}
+.window > .toggle .content .description {
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(255, 194, 194, 0.8);
+}
+.window .slider {
+  flex-direction: row;
+  padding: 4px;
+  border-radius: 8px;
+  background-color: rgba(255, 173, 199, 0.12);
+  border: 1px solid rgba(255, 173, 199, 0.2);
+}
+.window .slider .item {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.window .slider .item p {
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+.window .slider .item.selected {
+  background-color: #FF3224;
+}
+.window .slider .item.selected p {
+  font-weight: 700;
+  letter-spacing: -0.45px;
+}
+.window .down {
+  gap: 4px;
+}
+.window .collapse {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  gap: 4px;
+  padding: 6px;
+  cursor: pointer;
+}
+.window .collapse p {
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(255, 194, 194, 0.8);
+}
+.window .groups {
+  gap: 8px;
+}
+.window .groups .group {
+  gap: 12px;
+  padding: 12px;
+  padding-bottom: 16px;
+  background-color: rgba(255, 173, 199, 0.12);
+  border-radius: 18px;
+}
+.window .groups .group .header {
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+.window .groups .group .header .circle {
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: rgba(255, 173, 199, 0.2);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+.window .groups .group .header .title {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: -0.45px;
+  color: #FFFFFF;
+}
+.window .groups .group .divider {
+  height: 1px;
+  background-color: rgba(255, 173, 199, 0.2);
+}
+.window .groups .group .menus {
+  gap: 12px;
+}
+.window .groups .group .menus .menu {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.window .groups .group .menus .menu .content {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  color: #FFFFFF;
+}
+.window .groups .group .menus .menu .content p {
+  font-size: 12px;
+  line-height: 16px;
+}
+.window .groups .group .menus .menu .content::after {
+  content: "\10005c";
+  font-size: 10px;
+  line-height: 16px;
+}
+.window .groups .group .menus .menu::after {
+  content: "\100185";
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: -0.45px;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  border: 2px solid rgba(255, 173, 173, 0.42);
+}
+.window .groups .group .menus .menu.selected .content {
+  color: #FFFFFF;
+}
+.window .groups .group .menus .menu.selected::after {
+  color: #FFFFFF;
+  background-color: #FF3224;
+  border-color: #FF3224;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -30,7 +30,7 @@ app.on("ready", () => {
 
   mainWindow.loadFile('screen.html')
 
-  createInScreenTray(width, height, 0, 0)
+  // createInScreenTray(width, height, 0, 0)
 });
 
 const createTray = () => {
@@ -57,16 +57,16 @@ const getWindowPosition = () => {
 const createWindow = () => {
   window = new BrowserWindow({
     width: 260,
-    height: 450,
+    height: 488,
     show: false,
     frame: false,
     fullscreenable: false,
-    resizable: false,
+    resizable: true,
     transparent: true,
+    vibrancy: "fullscreen-ui",
     webPreferences: {
       backgroundThrottling: false,
     },
-    vibrancy: "fullscreen-ui",
   });
   window.loadURL(`file://${path.join(__dirname, "index.html")}`);
 

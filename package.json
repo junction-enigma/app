@@ -4,12 +4,14 @@
   "main": "main.js",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev electron ."
+    "dev": "cross-env NODE_ENV=dev electron .",
+    "dev:sass": "sass --watch public/css/style.scss public/css/style.css"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
     "electron": "^31.3.1",
     "electron-reload": "^2.0.0-alpha.1",
-    "electron-reloader": "^1.2.3"
+    "electron-reloader": "^1.2.3",
+    "sass": "^1.77.8"
   }
 }
