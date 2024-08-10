@@ -14,9 +14,10 @@ let tray = undefined;
 let window = undefined;
 let inScreenTray = undefined;
 
-app.dock.hide();
-
 app.on("ready", () => {
+  app.dock.hide();
+  app.dock.isVisible(false);
+
   createTray();
   createWindow();
 });
@@ -52,6 +53,7 @@ const createWindow = () => {
     resizable: true,
     transparent: true,
     vibrancy: "fullscreen-ui",
+    skipTaskbar: true,
     webPreferences: {
       backgroundThrottling: false,
       preload: path.join(__dirname, "preload.js"),
@@ -62,7 +64,7 @@ const createWindow = () => {
     const webContents = event.sender;
     const win = BrowserWindow.fromWebContents(webContents);
     console.log(value);
-    setBackgroundOpacity("0.5");
+    setBackgroundOpacity(value);
   });
 
   session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {
