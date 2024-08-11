@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SF Pro";
-  src: url("../font/SFNS.ttf") format("turetype");
+  src: url("../font/SFNS.ttf") format("truetype");
 }
 * {
   padding: 0;
@@ -77,9 +77,13 @@ div {
   background-color: rgba(255, 173, 199, 0.12);
   border: 1px solid rgba(255, 173, 199, 0.12);
   cursor: pointer;
-  font-size: 32px;
-  font-weight: 700;
-  color: #FFFFFF;
+}
+.window > .toggle .power i {
+  width: 40px;
+  height: 40px;
+  -webkit-mask-image: url("../icon/switch.svg");
+  mask-image: url("../icon/switch.svg");
+  background-color: rgba(255, 194, 194, 0.8);
 }
 .window > .toggle .content .title {
   font-size: 32px;
@@ -97,6 +101,9 @@ div {
   background-color: #FF3224;
   border-color: #FF3224;
   box-shadow: 0px 0px 28px 0px rgba(255, 50, 36, 0.4), 0px 4px 8px 4px rgba(0, 0, 0, 0.5) inset;
+}
+.window > .toggle.on .power i {
+  background-color: #FFFFFF;
 }
 .window > .toggle.on .content .title {
   color: #FF3224;

@@ -24,7 +24,7 @@ $text-50: rgba(#FFC2C2, 0.8);
 
 @font-face {
 	font-family: "SF Pro";
-	src: url("../font/SFNS.ttf") format("turetype");
+	src: url("../font/SFNS.ttf") format("truetype");
 }
 
 * {
@@ -110,9 +110,14 @@ div {
       border: 1px solid $surface;
       cursor: pointer;
 
-      font-size: 32px;
-      font-weight: 700;
-      color: $text-100;
+      i {
+        width: 40px;
+        height: 40px;
+        -webkit-mask-image: url("../icon/switch.svg");
+        mask-image: url("../icon/switch.svg");
+
+        background-color: $text-50;
+      }
     }
 
     .content {
@@ -135,6 +140,10 @@ div {
         background-color: $primary;
         border-color: $primary;
         box-shadow: 0px 0px 28px 0px rgba($primary, 0.4), 0px 4px 8px 4px rgba(0, 0, 0, 0.50) inset;
+
+        i {
+          background-color: $text-100;
+        }
       }
 
       .content {
