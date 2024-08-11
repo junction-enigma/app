@@ -2,24 +2,18 @@
 <html>
 
 <head>
-
   <meta charset="utf-8">
 
   <link rel="stylesheet" href="public/css/style.css">
-  <script src="jquery.min.js"></script>
+  <script src="public/js/jquery.min.js"></script>
 </head>
 
 <body>
   <div class="window">
     <div class="header">
       <p class="title">OME!</p>
-      <div class="buttons">
-        <div class="button">
-          <p>Quit</p>
-        </div>
-        <div class="button">
-          <p>Settings</p>
-        </div>
+      <div id="quit" class="button">
+        <p>Quit</p>
       </div>
     </div>
     <div id="toggle" class="toggle">
@@ -29,74 +23,13 @@
         <p class="description">Now you are protected</p>
       </div>
     </div>
-    <div class="slider">
-      <div class="item selected">
-        <p>Eyes only</p>
-      </div>
-      <div class="item">
-        <p>Ears only</p>
-      </div>
-      <div class="item">
-        <p>Manual</p>
-      </div>
-    </div>
-    <div class="down">
-      <div class="collapse">
-        <p>Hide function toggles</p>
-        <p class="icon">􀁮</p>
-      </div>
-      <div id="groups">
-        <div class="group">
-          <div class="header">
-            <div class="circle">
-              <p>􀋭</p>
-            </div>
-            <p class="title">Eyes & Privacy</p>
-          </div>
-          <div class="divider"></div>
-          <div id="menus">
-            <div id="menu">
-              <div class="content">
-                <p>App brightness control</p>
-              </div>
-            </div>
-            <div id="menu">
-              <div class="content">
-                <p>Blinking protection</p>
-              </div>
-            </div>
-            <div id="menu">
-              <div class="content">
-                <p>Privacy board</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="group">
-          <div class="header">
-            <div class="circle">
-              <p>􀜣</p>
-            </div>
-            <p class="title">Ears & Sound</p>
-          </div>
-          <div class="divider"></div>
-          <div id="menus">
-            <div id="menu">
-              <div class="content">
-                <p>Prevent loud noises</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="hidden">
       <video width="32" height="24" autoplay></video>
       <canvas id="canvas" width="32" height="24"></canvas>
     </div>
   </div>
-  <script src="screen.js"></script>
+  <script src="public/js/utils.js"></script>
 
 </body>
 

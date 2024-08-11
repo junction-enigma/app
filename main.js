@@ -12,41 +12,31 @@ const path = require("path");
 
 let tray = undefined;
 let window = undefined;
-let inScreenTray = undefined;
+let overlayWindow = undefined;
+let isEnableOpacity = true;
 
+app.dock.hide();
 app.on("ready", () => {
   app.dock.hide();
   app.dock.isVisible(false);
 
   createTray();
   createWindow();
+  createOverlayWindow();
 });
 
 const createTray = () => {
   const icon = nativeImage.createFromPath(path.join("tray.png"));
-  tray = new Tray(icon);
+  tray = new Tray(icon);  
   tray.on("click", function (event) {
     toggleWindow();
   });
 };
 
-const getWindowPosition = () => {
-  const windowBounds = window.getBounds();
-  const trayBounds = tray.getBounds();
-
-  const x = Math.round(
-    trayBounds.x + trayBounds.width / 2 - windowBounds.width / 2
-  );
-
-  const y = Math.round(trayBounds.y + trayBounds.height + 4);
-
-  return { x: x, y: y };
-};
-
 const createWindow = () => {
   window = new BrowserWindow({
     width: 260,
-    height: 488,
+    height: 140,
     show: false,
     frame: false,
     fullscreenable: false,
@@ -60,13 +50,11 @@ const createWindow = () => {
     },
   });
 
-  ipcMain.on("set-opacity", (event, value) => {
-    const webContents = event.sender;
-    const win = BrowserWindow.fromWebContents(webContents);
+  ipcMain.on("set-opacity", (_, value) => {
     setBackgroundOpacity(value);
   });
 
-  session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {
+  session.defaultSession.setDisplayMediaRequestHandler((_, callback) => {
     desktopCapturer
       .getSources({ types: ["window", "screen"] })
       .then((sources) => {
@@ -83,12 +71,7 @@ const createWindow = () => {
       });
   });
 
-  const primaryDisplay = screen.getPrimaryDisplay();
-  const { width, height } = primaryDisplay.workAreaSize;
-
   window.loadURL(`file://${path.join(__dirname, "index.html")}`);
-
-  createInScreenTray(width, height, 0, 0);
   window.setSkipTaskbar(true);
 
   window.on("blur", () => {
@@ -98,8 +81,38 @@ const createWindow = () => {
   });
 };
 
-const createInScreenTray = (width, height, x, y) => {
-  inScreenTray = new BrowserWindow({
+const getWindowPosition = () => {
+  const windowBounds = window.getBounds();
+  const trayBounds = tray.getBounds();
+
+  const x = Math.round(
+    trayBounds.x + trayBounds.width / 2 - windowBounds.width / 2
+  );
+
+  const y = Math.round(trayBounds.y + trayBounds.height + 4);
+
+  return { x: x, y: y };
+};
+
+const setBackgroundOpacity = (value) => {
+  overlayWindow.webContents.send("send-opacity", value);
+};
+
+const toggleWindow = () => {
+  window.isVisible() ? window.hide() : showWindow();
+};
+
+const showWindow = () => {
+  const position = getWindowPosition();
+  window.setPosition(position.x, position.y, false);
+  window.show();
+};
+
+const createOverlayWindow = () => {
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { width, height } = primaryDisplay.workAreaSize;
+
+  overlayWindow = new BrowserWindow({
     width: width,
     height: height,
     resizable: false,
@@ -116,36 +129,14 @@ const createInScreenTray = (width, height, x, y) => {
     },
   });
 
-  inScreenTray.setAlwaysOnTop(true, "screen-saver");
-  inScreenTray.setVisibleOnAllWorkspaces(true);
-  inScreenTray.loadURL(`file://${path.join(__dirname, "tray.html")}`);
-  inScreenTray.setPosition(x, y, false);
-  inScreenTray.show();
-  inScreenTray.setIgnoreMouseEvents(true);
-
-  getAllWindows();
+  overlayWindow.setAlwaysOnTop(true, "screen-saver");
+  overlayWindow.setVisibleOnAllWorkspaces(true);
+  overlayWindow.loadURL(`file://${path.join(__dirname, "tray.html")}`);
+  overlayWindow.setPosition(0, 0, false);
+  overlayWindow.show();
+  overlayWindow.setIgnoreMouseEvents(true);
 };
 
-let isEnableOpacity = false;
-
-const setBackgroundOpacity = (value) => {
-  inScreenTray.webContents.send("send-opacity", value);
-};
-
-const getAllWindows = () => {
-  const windowsLists = BrowserWindow.getAllWindows();
-};
-
-const toggleWindow = () => {
-  window.isVisible() ? window.hide() : showWindow();
-};
-
-const showWindow = () => {
-  const position = getWindowPosition();
-  window.setPosition(position.x, position.y, false);
-  window.show();
-};
-
-ipcMain.on("show-window", () => {
-  showWindow();
+ipcMain.on("quit", () => {
+  app.quit();
 });
