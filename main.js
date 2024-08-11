@@ -23,7 +23,7 @@ app.on("ready", () => {
 });
 
 const createTray = () => {
-  const icon = nativeImage.createFromPath(path.join("logo.png"));
+  const icon = nativeImage.createFromPath(path.join("tray.png"));
   tray = new Tray(icon);
   tray.on("click", function (event) {
     toggleWindow();
@@ -63,7 +63,6 @@ const createWindow = () => {
   ipcMain.on("set-opacity", (event, value) => {
     const webContents = event.sender;
     const win = BrowserWindow.fromWebContents(webContents);
-    console.log(value);
     setBackgroundOpacity(value);
   });
 

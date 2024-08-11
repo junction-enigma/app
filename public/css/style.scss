@@ -107,9 +107,8 @@ div {
       width: 72px;
       height: 72px;
       border-radius: 36px;
-      background-color: $primary;
-      border: 1px solid $primary;
-      box-shadow: 0px 0px 28px 0px rgba($primary, 0.4), 0px 4px 8px 4px rgba(0, 0, 0, 0.50) inset;
+      background-color: $surface;
+      border: 1px solid $surface;
       cursor: pointer;
 
       font-size: 32px;
@@ -123,12 +122,26 @@ div {
         line-height: 32px;
         font-weight: 1000;
         font-variation-settings: "wdth" 150;
-        color: $primary;
+        color: $text-50;
       }
 
       .description {
         @include text;
         color: $text-50;
+      }
+    }
+
+    &.on {
+      .power {
+        background-color: $primary;
+        border-color: $primary;
+        box-shadow: 0px 0px 28px 0px rgba($primary, 0.4), 0px 4px 8px 4px rgba(0, 0, 0, 0.50) inset;
+      }
+
+      .content {
+        .title {
+          color: $primary;
+        }
       }
     }
   }
@@ -182,8 +195,13 @@ div {
     }
   }
 
-  .groups {
+  #groups {
+    overflow: hidden;
     gap: 8px;
+
+    &.fold {
+      height: 0;
+    }
 
     .group {
       gap: 12px;
@@ -222,10 +240,10 @@ div {
         background-color: $line;
       }
 
-      .menus {
+      #menus {
         gap: 12px;
 
-        .menu {
+        #menu {
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
@@ -276,5 +294,11 @@ div {
         }
       }
     }
+  }
+
+  .hidden {
+    position: fixed;
+    pointer-events: none;
+    visibility: hidden;
   }
 }

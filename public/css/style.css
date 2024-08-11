@@ -74,9 +74,8 @@ div {
   width: 72px;
   height: 72px;
   border-radius: 36px;
-  background-color: #FF3224;
-  border: 1px solid #FF3224;
-  box-shadow: 0px 0px 28px 0px rgba(255, 50, 36, 0.4), 0px 4px 8px 4px rgba(0, 0, 0, 0.5) inset;
+  background-color: rgba(255, 173, 199, 0.12);
+  border: 1px solid rgba(255, 173, 199, 0.12);
   cursor: pointer;
   font-size: 32px;
   font-weight: 700;
@@ -87,12 +86,20 @@ div {
   line-height: 32px;
   font-weight: 1000;
   font-variation-settings: "wdth" 150;
-  color: #FF3224;
+  color: rgba(255, 194, 194, 0.8);
 }
 .window > .toggle .content .description {
   font-size: 12px;
   line-height: 16px;
   color: rgba(255, 194, 194, 0.8);
+}
+.window > .toggle.on .power {
+  background-color: #FF3224;
+  border-color: #FF3224;
+  box-shadow: 0px 0px 28px 0px rgba(255, 50, 36, 0.4), 0px 4px 8px 4px rgba(0, 0, 0, 0.5) inset;
+}
+.window > .toggle.on .content .title {
+  color: #FF3224;
 }
 .window .slider {
   flex-direction: row;
@@ -138,22 +145,26 @@ div {
   line-height: 16px;
   color: rgba(255, 194, 194, 0.8);
 }
-.window .groups {
+.window #groups {
+  overflow: hidden;
   gap: 8px;
 }
-.window .groups .group {
+.window #groups.fold {
+  height: 0;
+}
+.window #groups .group {
   gap: 12px;
   padding: 12px;
   padding-bottom: 16px;
   background-color: rgba(255, 173, 199, 0.12);
   border-radius: 18px;
 }
-.window .groups .group .header {
+.window #groups .group .header {
   flex-direction: row;
   gap: 8px;
   align-items: center;
 }
-.window .groups .group .header .circle {
+.window #groups .group .header .circle {
   align-items: center;
   justify-content: center;
   width: 24px;
@@ -165,42 +176,42 @@ div {
   line-height: 16px;
   color: #FFFFFF;
 }
-.window .groups .group .header .title {
+.window #groups .group .header .title {
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;
   letter-spacing: -0.45px;
   color: #FFFFFF;
 }
-.window .groups .group .divider {
+.window #groups .group .divider {
   height: 1px;
   background-color: rgba(255, 173, 199, 0.2);
 }
-.window .groups .group .menus {
+.window #groups .group #menus {
   gap: 12px;
 }
-.window .groups .group .menus .menu {
+.window #groups .group #menus #menu {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
 }
-.window .groups .group .menus .menu .content {
+.window #groups .group #menus #menu .content {
   flex-direction: row;
   align-items: center;
   gap: 4px;
   color: #FFFFFF;
 }
-.window .groups .group .menus .menu .content p {
+.window #groups .group #menus #menu .content p {
   font-size: 12px;
   line-height: 16px;
 }
-.window .groups .group .menus .menu .content::after {
+.window #groups .group #menus #menu .content::after {
   content: "\10005c";
   font-size: 10px;
   line-height: 16px;
 }
-.window .groups .group .menus .menu::after {
+.window #groups .group #menus #menu::after {
   content: "\100185";
   font-size: 10px;
   line-height: 16px;
@@ -215,13 +226,18 @@ div {
   border-radius: 4px;
   border: 2px solid rgba(255, 173, 173, 0.42);
 }
-.window .groups .group .menus .menu.selected .content {
+.window #groups .group #menus #menu.selected .content {
   color: #FFFFFF;
 }
-.window .groups .group .menus .menu.selected::after {
+.window #groups .group #menus #menu.selected::after {
   color: #FFFFFF;
   background-color: #FF3224;
   border-color: #FF3224;
+}
+.window .hidden {
+  position: fixed;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 /*# sourceMappingURL=style.css.map */

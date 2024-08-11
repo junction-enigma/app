@@ -2,10 +2,11 @@
 <html>
 
 <head>
-  
+
   <meta charset="utf-8">
 
   <link rel="stylesheet" href="public/css/style.css">
+  <script src="jquery.min.js"></script>
 </head>
 
 <body>
@@ -21,10 +22,10 @@
         </div>
       </div>
     </div>
-    <div  id="startButton"  class="toggle">
-      <div class="power">􀆨</div>
+    <div id="toggle" class="toggle">
+      <div id="togglePower" class="power">􀆨</div>
       <div class="content">
-        <p id="startButtonTitle" class="title">OFF</p>
+        <p class="title">OFF</p>
         <p class="description">Now you are protected</p>
       </div>
     </div>
@@ -44,7 +45,7 @@
         <p>Hide function toggles</p>
         <p class="icon">􀁮</p>
       </div>
-      <div class="groups">
+      <div id="groups">
         <div class="group">
           <div class="header">
             <div class="circle">
@@ -53,18 +54,18 @@
             <p class="title">Eyes & Privacy</p>
           </div>
           <div class="divider"></div>
-          <div class="menus">
-            <div class="menu selected">
+          <div id="menus">
+            <div id="menu">
               <div class="content">
                 <p>App brightness control</p>
               </div>
             </div>
-            <div class="menu">
+            <div id="menu">
               <div class="content">
                 <p>Blinking protection</p>
               </div>
             </div>
-            <div class="menu">
+            <div id="menu">
               <div class="content">
                 <p>Privacy board</p>
               </div>
@@ -79,8 +80,8 @@
             <p class="title">Ears & Sound</p>
           </div>
           <div class="divider"></div>
-          <div class="menus">
-            <div class="menu">
+          <div id="menus">
+            <div id="menu">
               <div class="content">
                 <p>Prevent loud noises</p>
               </div>
@@ -90,9 +91,10 @@
       </div>
     </div>
 
-    <video width="32" height="24" autoplay style="visibility: hidden;"></video>
-    <canvas id="canvas" width="32" height="24" style="visibility: hidden;"></canvas>
-
+    <div class="hidden">
+      <video width="32" height="24" autoplay></video>
+      <canvas id="canvas" width="32" height="24"></canvas>
+    </div>
   </div>
   <script src="screen.js"></script>
 
