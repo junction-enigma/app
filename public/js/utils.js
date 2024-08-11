@@ -9,6 +9,8 @@ $("#menus #menu").on("click", (e) => {
 })
 
 const start = () => {
+  window.electronAPI.setOpacity(0);
+  window.electronAPI.showOverlay();
   navigator.mediaDevices
     .getDisplayMedia({
       video: {
@@ -24,10 +26,10 @@ const start = () => {
     .catch((e) => console.log(e));
 };
 const stop = () => {
+  window.electronAPI.hideOverlay();
   video.srcObject.getTracks().forEach((track) => track.stop());
   video.srcObject = null;
   video.pause();
-  window.electronAPI.setOpacity(0);
 };
 
 $("#togglePower").on("click", () => {

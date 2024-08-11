@@ -13,7 +13,9 @@ const path = require("path");
 let tray = undefined;
 let window = undefined;
 let overlayWindow = undefined;
-let isEnableOpacity = true;
+
+const trayIcon = nativeImage.createFromPath(path.join("tray.png"));
+const appIcon = nativeImage.createFromPath(path.join("icon.png"));
 
 app.dock.hide();
 app.on("ready", () => {
@@ -26,8 +28,7 @@ app.on("ready", () => {
 });
 
 const createTray = () => {
-  const icon = nativeImage.createFromPath(path.join("tray.png"));
-  tray = new Tray(icon);  
+  tray = new Tray(trayIcon);
   tray.on("click", function (event) {
     toggleWindow();
   });
@@ -44,6 +45,7 @@ const createWindow = () => {
     transparent: true,
     vibrancy: "fullscreen-ui",
     skipTaskbar: true,
+    icon: appIcon,
     webPreferences: {
       backgroundThrottling: false,
       preload: path.join(__dirname, "preload.js"),
@@ -123,6 +125,7 @@ const createOverlayWindow = () => {
     frame: false,
     movable: false,
     show: false,
+    icon: appIcon,
     webPreferences: {
       backgroundThrottling: false,
       preload: path.join(__dirname, "preload.js"),
@@ -136,6 +139,14 @@ const createOverlayWindow = () => {
   overlayWindow.show();
   overlayWindow.setIgnoreMouseEvents(true);
 };
+
+ipcMain.on("show-overlay", () => {
+  overlayWindow.show();
+});
+
+ipcMain.on("hide-overlay", () => {
+  overlayWindow.hide();
+});
 
 ipcMain.on("quit", () => {
   app.quit();

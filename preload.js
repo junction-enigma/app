@@ -5,4 +5,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
   onUpdateOpacity: (callback) =>
     ipcRenderer.on("send-opacity", (_event, value) => callback(value)),
   quit: () => ipcRenderer.send("quit"),
+  showOverlay: () => ipcRenderer.send("show-overlay"),
+  hideOverlay: () => ipcRenderer.send("hide-overlay"),
 });
